@@ -237,31 +237,31 @@ async function main() {
   await prisma.adPlacement.createMany({
     data: [
       {
-        name: "????? ??????",
+        name: "إعلان الهيدر",
         position: "header",
         enabled: true,
         code: "<a href='https://omg10.com/4/10927743' target='_blank' rel='noopener noreferrer' style='display:flex;min-height:90px;align-items:center;justify-content:center;border-radius:12px;background:linear-gradient(90deg,#e11d2e,#f97316);color:#fff;text-decoration:none;font-weight:700;font-size:18px;'>\u0625\u0639\u0644\u0627\u0646 \u0645\u0645\u0648\u0644 - \u0627\u0636\u063a\u0637 \u0647\u0646\u0627</a>"
       },
       {
-        name: "????? ?????? ???????",
+        name: "إعلان الشريط الجانبي",
         position: "sidebar",
         enabled: true,
         code: "<a href='https://omg10.com/4/10927743' target='_blank' rel='noopener noreferrer' style='display:flex;min-height:280px;align-items:center;justify-content:center;border-radius:12px;background:linear-gradient(180deg,#111827,#ef4444);color:#fff;text-decoration:none;font-weight:700;font-size:20px;padding:16px;'>\u0625\u0639\u0644\u0627\u0646 \u062c\u0627\u0646\u0628\u064a \u0645\u0645\u0648\u0644</a>"
       },
       {
-        name: "????? ???? ??????",
+        name: "إعلان أسفل المشغل",
         position: "below-player",
         enabled: true,
         code: "<a href='https://omg10.com/4/10927743' target='_blank' rel='noopener noreferrer' style='display:flex;min-height:110px;align-items:center;justify-content:center;border-radius:12px;background:linear-gradient(90deg,#dc2626,#7c3aed);color:#fff;text-decoration:none;font-weight:700;font-size:18px;'>\u0625\u0639\u0644\u0627\u0646 \u0623\u0633\u0641\u0644 \u0627\u0644\u0645\u0634\u063a\u0644</a>"
       },
       {
-        name: "????? ???? ???????",
+        name: "إعلان داخل القوائم",
         position: "in-feed",
         enabled: true,
         code: "<a href='https://omg10.com/4/10927743' target='_blank' rel='noopener noreferrer' style='display:flex;min-height:160px;align-items:center;justify-content:center;border-radius:12px;background:linear-gradient(90deg,#0f172a,#2563eb);color:#fff;text-decoration:none;font-weight:700;font-size:18px;'>\u0625\u0639\u0644\u0627\u0646 \u062f\u0627\u062e\u0644 \u0627\u0644\u0634\u0628\u0643\u0629</a>"
       },
       {
-        name: "????? ?????",
+        name: "إعلان منبثق",
         position: "popup",
         enabled: false,
         code: "<div class='text-sm'>\u0625\u0639\u0644\u0627\u0646 \u0645\u0646\u0628\u062b\u0642</div>"

@@ -1,74 +1,78 @@
-# منصة المشاهدة العربية
+# EgyX
 
-منصة بث عربية مبنية بـ Next.js 14 App Router وTypeScript وTailwind CSS وPrisma وPostgreSQL وAuth.js.
+Arabic streaming/catalog platform built with Next.js 14 App Router, TypeScript, Tailwind CSS, Prisma, PostgreSQL, and Auth.js.
 
-## المزايا
+## Local Setup
 
-- واجهة عربية كاملة مع RTL.
-- صفحات عامة للأفلام والمسلسلات والحلقات وصفحات مشاهدة متعددة السيرفرات.
-- لوحة إدارة محمية لتعديل المحتوى والتصنيفات والمواسم والحلقات ومصادر الفيديو.
-- نظام إعلانات قابل للتفعيل والتعطيل مع أماكن عرض متعددة.
-- SEO ديناميكي مع Metadata وOpen Graph وTwitter Cards وJSON-LD وSitemap وRobots.
-- بيانات Seed عربية جاهزة لتجربة النظام مباشرة.
-
-## المتطلبات
-
-- Node.js 18.18+ أو 20+
-- PostgreSQL
-
-## الإعداد
-
-1. انسخ ملف البيئة:
+1. Copy the environment file:
 
 ```bash
 cp .env.example .env
 ```
 
-2. حدّث `DATABASE_URL` و`NEXTAUTH_SECRET`.
-
-3. ثبّت الحزم:
+2. Install dependencies:
 
 ```bash
 npm install
 ```
 
-4. ولّد Prisma Client:
+3. Generate Prisma Client:
 
 ```bash
 npx prisma generate
 ```
 
-5. أنشئ الجداول:
+4. Apply local development migrations:
 
 ```bash
 npx prisma migrate dev
 ```
 
-6. حمّل البيانات التجريبية:
+5. Seed sample data:
 
 ```bash
 npx prisma db seed
 ```
 
-7. شغّل المشروع:
+6. Start development:
 
 ```bash
 npm run dev
 ```
 
-## بيانات الدخول الافتراضية
+## Default Admin Login
 
-- البريد: `admin@example.com`
-- كلمة المرور: `Admin@12345`
+- Email: `admin@example.com`
+- Password: `Admin@12345`
 
-## النشر على Vercel
+## Production Deployment (Neon + Vercel)
 
-- أضف متغيرات البيئة نفسها على Vercel.
-- استخدم PostgreSQL متوافقًا مع Prisma.
-- نفّذ `prisma generate` أثناء البناء و`prisma migrate deploy` في بيئة الإنتاج.
+1. Create a PostgreSQL database on Neon.
+2. Copy the Neon connection string.
+3. Add these environment variables in Vercel:
+   - `DATABASE_URL`
+   - `NEXTAUTH_SECRET`
+   - `NEXTAUTH_URL`
+4. Recommended build command:
 
-## ملاحظات تقنية
+```bash
+npx prisma generate && next build
+```
 
-- المسودات لا تظهر في الصفحات العامة.
-- تسجيلات المشاهدة تُحفظ عند فتح صفحات المشاهدة.
-- البحث يملك Rate Limit بسيط داخل الذاكرة مناسب كبداية ويمكن استبداله لاحقًا بـ Redis.
+5. Run production migrations:
+
+```bash
+npx prisma migrate deploy
+```
+
+6. Seed production only once if needed:
+
+```bash
+npx prisma db seed
+```
+
+## Notes
+
+- Keep `.env` local and never commit real secrets.
+- Prisma migrations are stored in `prisma/migrations`.
+- Public pages only show published content.
