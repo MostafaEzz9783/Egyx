@@ -9,11 +9,11 @@ type BelowPlayerAdProps = {
 export function BelowPlayerAd({ code, enabled = true }: BelowPlayerAdProps) {
   return (
     <AdSlot
-      code={code}
+      code={adsConfig.belowPlayerBanner300x250Code || code}
       enabled={adsConfig.enabled && enabled}
       fallbackLabel="إعلان أسفل المشغل"
       className="mt-4"
-      minHeightClassName="min-h-[110px]"
+      minHeightClassName="min-h-[250px]"
     />
   );
 }

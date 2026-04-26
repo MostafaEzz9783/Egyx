@@ -9,11 +9,11 @@ type SidebarAdProps = {
 export function SidebarAd({ code, enabled = true }: SidebarAdProps) {
   return (
     <AdSlot
-      code={code}
+      code={adsConfig.sidebarBanner160x600Code || code}
       enabled={adsConfig.enabled && enabled}
       fallbackLabel="مساحة إعلانية جانبية"
       className="mt-4"
-      minHeightClassName="min-h-[280px]"
+      minHeightClassName="min-h-[600px]"
     />
   );
 }

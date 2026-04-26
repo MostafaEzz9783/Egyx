@@ -9,7 +9,7 @@ type HeaderAdProps = {
 export function HeaderAd({ code, enabled = true }: HeaderAdProps) {
   return (
     <AdSlot
-      code={code}
+      code={adsConfig.headerBanner728Code || code}
       enabled={adsConfig.enabled && enabled}
       fallbackLabel="مساحة إعلانية علوية"
       className="mt-4"
