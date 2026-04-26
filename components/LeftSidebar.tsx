@@ -31,12 +31,9 @@ type LeftSidebarProps = {
   sidebarAdEnabled?: boolean;
 };
 
-export function LeftSidebar({
-  sidebarAdCode,
-  sidebarAdEnabled = true
-}: LeftSidebarProps) {
+export function LeftSidebar({ sidebarAdCode, sidebarAdEnabled = true }: LeftSidebarProps) {
   return (
-    <div className="w-[220px] space-y-4">
+    <div className="ad-rail w-[200px]">
       <div className="sidebar-box">
         <h3 className="sidebar-title">تابع EgyX</h3>
         <div className="space-y-2">
@@ -44,7 +41,7 @@ export function LeftSidebar({
             <Link
               key={item.label}
               href={item.href}
-              className="flex items-center gap-3 rounded-md border border-border bg-[#fafafa] px-3 py-2 text-sm text-foreground hover:text-accent"
+              className="flex items-center gap-3 rounded-xl border border-[#ececec] bg-[#fafafa] px-3 py-2 text-sm text-foreground hover:text-accent"
             >
               <span className={`h-3 w-3 rounded-full ${item.color}`} />
               {item.label}
@@ -60,7 +57,7 @@ export function LeftSidebar({
             <Link
               key={item.label}
               href={item.href}
-              className="rounded-md border border-border bg-[#fafafa] px-2 py-2 text-center text-[0.72rem] font-medium leading-5 text-[#1f5fa9] hover:text-accent"
+              className="rounded-xl border border-[#ececec] bg-[#fafafa] px-2 py-2 text-center text-[0.72rem] font-medium leading-5 text-[#1f5fa9] hover:text-accent"
             >
               {item.label}
             </Link>

@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { usePathname, useSearchParams } from "next/navigation";
+import { SidebarAd } from "@/components/ads/SidebarAd";
 import { cn } from "@/lib/utils";
 
 const links = [
@@ -13,39 +14,48 @@ const links = [
   { href: "/search?q=كرتون", label: "أحدث الكرتون", match: "/search", query: "كرتون" }
 ];
 
-export function RightSidebar() {
+type RightSidebarProps = {
+  sidebarAdCode?: string | null;
+  sidebarAdEnabled?: boolean;
+};
+
+export function RightSidebar({ sidebarAdCode, sidebarAdEnabled = true }: RightSidebarProps) {
   const pathname = usePathname();
   const searchParams = useSearchParams();
   const q = searchParams.get("q") || "";
 
   return (
-    <div className="sidebar-box w-[220px] p-0">
-      <div className="sidebar-title px-4 pt-4">القائمة</div>
-      <nav className="pb-2">
-        {links.map((link) => {
-          const isActive =
-            link.href === "/"
-              ? pathname === "/"
-              : link.query
-                ? pathname === link.match && q.includes(link.query)
-                : pathname === link.match || pathname.startsWith(`${link.match}/`);
+    <div className="ad-rail w-[200px]">
+      <div className="sidebar-box p-0">
+        <div className="sidebar-title px-4 pt-4">القائمة</div>
+        <nav className="pb-2">
+          {links.map((link) => {
+            const isActive =
+              link.href === "/"
+                ? pathname === "/"
+                : link.query
+                  ? pathname === link.match && q.includes(link.query)
+                  : pathname === link.match || pathname.startsWith(`${link.match}/`);
 
-          return (
-            <Link
-              key={link.label}
-              href={link.href}
-              className={cn(
-                "mx-3 mb-2 block rounded-md px-4 py-3 text-[0.95rem] font-medium transition",
-                isActive
-                  ? "bg-accent text-white"
-                  : "bg-[#f8f8f8] text-foreground hover:bg-[#f2f2f2] hover:text-accent"
-              )}
-            >
-              {link.label}
-            </Link>
-          );
-        })}
-      </nav>
+            return (
+              <Link
+                key={link.label}
+                href={link.href}
+                className={cn(
+                  "mx-3 mb-2 block rounded-xl px-4 py-3 text-[0.94rem] font-medium transition",
+                  isActive
+                    ? "bg-accent text-white"
+                    : "bg-[#f8f8f8] text-foreground hover:bg-[#f1f5f9] hover:text-accent"
+                )}
+              >
+                {link.label}
+              </Link>
+            );
+          })}
+        </nav>
+      </div>
+
+      <SidebarAd code={sidebarAdCode} enabled={sidebarAdEnabled} />
     </div>
   );
 }

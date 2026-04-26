@@ -90,9 +90,9 @@ export default async function MovieDetailsPage({
   return (
     <PublicShell>
       <SectionBox title={movie.title}>
-        <div className="grid gap-4 lg:grid-cols-[220px,minmax(0,1fr)]">
-          <div className="relative aspect-[2/3] overflow-hidden rounded-md border border-border bg-[#f2f2f2]">
-            <Image src={movie.posterUrl} alt={movie.title} fill sizes="220px" className="object-cover" />
+        <div className="grid gap-5 lg:grid-cols-[250px,minmax(0,1fr)]">
+          <div className="relative aspect-[2/3] overflow-hidden rounded-[18px] border border-[#e3e7ee] bg-[#f2f2f2]">
+            <Image src={movie.posterUrl} alt={movie.title} fill sizes="250px" className="object-cover" />
           </div>
           <div className="space-y-4">
             <div className="flex flex-wrap gap-2">

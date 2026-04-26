@@ -20,24 +20,26 @@ export function HeaderAd({ code, enabled = true }: HeaderAdProps) {
     [headerBanner728Code]
   );
 
-  if (!enabled || !adsConfig.enabled || !headerBanner728Code) {
+  if (!enabled || !adsConfig.enabled) {
     return null;
   }
 
-  console.log("HeaderAd loaded", headerBanner728Code);
-
   return (
-    <div className="mt-4 rounded-md border border-[#ddd] bg-white p-4 shadow-sm">
-      <div className="mx-auto flex min-h-[90px] w-full max-w-[728px] items-center justify-center overflow-hidden">
-        <iframe
-          title="Header Banner Ad"
-          srcDoc={iframeDocument}
-          width="728"
-          height="90"
-          frameBorder="0"
-          scrolling="no"
-          className="block h-[90px] w-full max-w-[728px] border-0"
-        />
+    <div className="section-box mb-4">
+      <div className="mx-auto flex min-h-[90px] w-full max-w-[728px] items-center justify-center overflow-hidden rounded-md border border-dashed border-[#e5e7eb] bg-[#fafafa]">
+        {headerBanner728Code ? (
+          <iframe
+            title="Header Banner Ad"
+            srcDoc={iframeDocument}
+            width="728"
+            height="90"
+            frameBorder="0"
+            scrolling="no"
+            className="block h-[90px] w-full max-w-[728px] border-0"
+          />
+        ) : (
+          <div aria-hidden="true" className="h-[90px] w-full max-w-[728px]" />
+        )}
       </div>
     </div>
   );

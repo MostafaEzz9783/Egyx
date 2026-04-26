@@ -34,7 +34,7 @@ export default async function MoviesPage({
   return (
     <PublicShell>
       <SectionBox title="أحدث الأفلام">
-        <form className="mb-4 grid gap-3 md:grid-cols-4">
+        <form className="filters-grid mb-4">
           <select name="genre" defaultValue={params.genre || ""} className="input-like">
             <option value="">كل التصنيفات</option>
             {genres.map((genre) => (
@@ -57,7 +57,7 @@ export default async function MoviesPage({
             <option value="7">7+</option>
             <option value="8">8+</option>
           </select>
-          <button className="rounded-md border border-accent bg-accent px-4 text-sm font-bold text-white">
+          <button className="rounded-xl border border-accent bg-accent px-4 text-sm font-bold text-white">
             تطبيق الفلاتر
           </button>
         </form>
@@ -79,7 +79,7 @@ export default async function MoviesPage({
             <Pagination currentPage={currentPage} totalPages={totalPages} pathname="/movies" searchParams={params} />
           </div>
         ) : (
-          <div className="rounded-md border border-border bg-[#fafafa] p-6 text-center text-sm text-muted">
+          <div className="rounded-xl border border-[#e6e9ef] bg-[#fafafa] p-6 text-center text-sm text-muted">
             لا توجد أفلام.
           </div>
         )}
