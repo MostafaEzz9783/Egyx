@@ -27,16 +27,18 @@ export function HeaderAd({ code, enabled = true }: HeaderAdProps) {
   console.log("HeaderAd loaded", headerBanner728Code);
 
   return (
-    <div className="mt-4 flex min-h-[90px] w-full items-center justify-center overflow-hidden rounded-xl border border-[#d8d8d8] bg-white p-4 shadow-sm">
-      <iframe
-        title="Header Banner Ad"
-        srcDoc={iframeDocument}
-        width="728"
-        height="90"
-        frameBorder="0"
-        scrolling="no"
-        className="block h-[90px] max-w-full border-0"
-      />
+    <div className="mt-4 rounded-md border border-[#ddd] bg-white p-4 shadow-sm">
+      <div className="mx-auto flex min-h-[90px] w-full max-w-[728px] items-center justify-center overflow-hidden">
+        <iframe
+          title="Header Banner Ad"
+          srcDoc={iframeDocument}
+          width="728"
+          height="90"
+          frameBorder="0"
+          scrolling="no"
+          className="block h-[90px] w-full max-w-[728px] border-0"
+        />
+      </div>
     </div>
   );
 }

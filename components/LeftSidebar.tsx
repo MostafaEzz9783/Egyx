@@ -36,7 +36,7 @@ export function LeftSidebar({
   sidebarAdEnabled = true
 }: LeftSidebarProps) {
   return (
-    <div className="space-y-4">
+    <div className="w-[220px] space-y-4">
       <div className="sidebar-box">
         <h3 className="sidebar-title">تابع EgyX</h3>
         <div className="space-y-2">
@@ -60,7 +60,7 @@ export function LeftSidebar({
             <Link
               key={item.label}
               href={item.href}
-              className="rounded-md border border-border bg-[#fafafa] px-2 py-2 text-center text-xs font-medium text-[#1f5fa9] hover:text-accent"
+              className="rounded-md border border-border bg-[#fafafa] px-2 py-2 text-center text-[0.72rem] font-medium leading-5 text-[#1f5fa9] hover:text-accent"
             >
               {item.label}
             </Link>

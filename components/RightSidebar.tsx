@@ -19,7 +19,7 @@ export function RightSidebar() {
   const q = searchParams.get("q") || "";
 
   return (
-    <div className="sidebar-box p-0">
+    <div className="sidebar-box w-[220px] p-0">
       <div className="sidebar-title px-4 pt-4">القائمة</div>
       <nav className="pb-2">
         {links.map((link) => {
@@ -35,7 +35,7 @@ export function RightSidebar() {
               key={link.label}
               href={link.href}
               className={cn(
-                "mx-3 mb-2 block rounded-md px-4 py-3 text-sm font-medium transition",
+                "mx-3 mb-2 block rounded-md px-4 py-3 text-[0.95rem] font-medium transition",
                 isActive
                   ? "bg-accent text-white"
                   : "bg-[#f8f8f8] text-foreground hover:bg-[#f2f2f2] hover:text-accent"

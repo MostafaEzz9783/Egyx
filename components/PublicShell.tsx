@@ -13,14 +13,14 @@ export async function PublicShell({ children }: { children: React.ReactNode }) {
       <Navbar />
       <main className="page-shell py-4 lg:py-5">
         <HeaderAd code={ads.header?.code} enabled={ads.header?.enabled ?? true} />
-        <div className="mt-4 grid gap-4 lg:grid-cols-[250px,minmax(0,1fr),220px]">
-          <aside className="hidden lg:block lg:col-start-3">
+        <div className="public-layout mt-4">
+          <aside className="public-layout-right hidden lg:block">
             <div className="sticky top-24">
               <RightSidebar />
             </div>
           </aside>
-          <section className="space-y-4 lg:col-start-2">{children}</section>
-          <aside className="hidden lg:block lg:col-start-1">
+          <section className="public-layout-center">{children}</section>
+          <aside className="public-layout-left hidden lg:block">
             <div className="sticky top-24">
               <LeftSidebar sidebarAdCode={ads.sidebar?.code} sidebarAdEnabled={ads.sidebar?.enabled ?? true} />
             </div>
