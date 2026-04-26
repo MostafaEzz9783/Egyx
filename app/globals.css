@@ -1,0 +1,89 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    background: #ececec;
+  }
+
+  ::selection {
+    background: rgba(217, 32, 39, 0.18);
+    color: #111827;
+  }
+
+  a,
+  button {
+    @apply transition;
+  }
+
+  input,
+  textarea,
+  select {
+    @apply text-foreground;
+  }
+
+  textarea {
+    resize: vertical;
+  }
+}
+
+@layer components {
+  .page-shell {
+    @apply mx-auto max-w-[1440px] px-3 lg:px-4;
+  }
+
+  .section-title {
+    @apply text-xl font-bold text-foreground lg:text-2xl;
+  }
+
+  .section-copy {
+    @apply mt-1 text-sm leading-6 text-muted;
+  }
+
+  .grid-cards {
+    @apply grid grid-cols-2 gap-3 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5;
+  }
+
+  .input-like {
+    @apply h-11 w-full rounded-md border border-border bg-white px-4 text-sm text-foreground outline-none focus:border-accent focus:ring-2 focus:ring-red-100;
+  }
+
+  .surface-box {
+    @apply rounded-md border border-border bg-white shadow-sm;
+  }
+
+  .sidebar-box {
+    @apply rounded-md border border-border bg-white p-4 shadow-sm;
+  }
+
+  .sidebar-title {
+    @apply mb-3 border-b border-border pb-2 text-sm font-bold text-foreground;
+  }
+
+  .section-box {
+    @apply rounded-md border border-border bg-white p-4 shadow-sm;
+  }
+
+  .section-box-header {
+    @apply mb-4 flex items-center justify-between border-b border-border pb-3;
+  }
+
+  .section-more {
+    @apply text-sm font-medium text-[#1f5fa9] hover:text-accent;
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+}

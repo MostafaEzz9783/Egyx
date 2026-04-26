@@ -1,0 +1,184 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum Role {
+  ADMIN
+  EDITOR
+}
+
+enum ContentStatus {
+  DRAFT
+  PUBLISHED
+  ARCHIVED
+}
+
+model User {
+  id           String   @id @default(cuid())
+  name         String
+  email        String   @unique
+  passwordHash String
+  role         Role     @default(ADMIN)
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+}
+
+model Movie {
+  id              String         @id @default(cuid())
+  title           String
+  slug            String         @unique
+  description     String         @db.Text
+  posterUrl       String
+  backdropUrl     String
+  year            Int
+  duration        Int
+  rating          Float
+  language        String
+  country         String
+  status          ContentStatus  @default(DRAFT)
+  metaTitle       String?
+  metaDescription String?        @db.Text
+  createdAt       DateTime       @default(now())
+  updatedAt       DateTime       @updatedAt
+  genres          MovieGenre[]
+  videoSources    VideoSource[]
+  viewLogs        ViewLog[]
+
+  @@index([status, createdAt])
+  @@index([year, rating])
+}
+
+model Series {
+  id              String         @id @default(cuid())
+  title           String
+  slug            String         @unique
+  description     String         @db.Text
+  posterUrl       String
+  backdropUrl     String
+  year            Int
+  rating          Float
+  language        String
+  country         String
+  status          ContentStatus  @default(DRAFT)
+  metaTitle       String?
+  metaDescription String?        @db.Text
+  createdAt       DateTime       @default(now())
+  updatedAt       DateTime       @updatedAt
+  seasons         Season[]
+  episodes        Episode[]
+  genres          SeriesGenre[]
+
+  @@index([status, createdAt])
+  @@index([year, rating])
+}
+
+model Season {
+  id           String    @id @default(cuid())
+  seriesId     String
+  seasonNumber Int
+  title        String
+  series       Series    @relation(fields: [seriesId], references: [id], onDelete: Cascade)
+  episodes     Episode[]
+
+  @@unique([seriesId, seasonNumber])
+  @@index([seriesId])
+}
+
+model Episode {
+  id              String         @id @default(cuid())
+  seriesId        String
+  seasonId        String
+  title           String
+  slug            String         @unique
+  episodeNumber   Int
+  description     String         @db.Text
+  posterUrl       String
+  duration        Int
+  status          ContentStatus  @default(DRAFT)
+  metaTitle       String?
+  metaDescription String?        @db.Text
+  createdAt       DateTime       @default(now())
+  updatedAt       DateTime       @updatedAt
+  series          Series         @relation(fields: [seriesId], references: [id], onDelete: Cascade)
+  season          Season         @relation(fields: [seasonId], references: [id], onDelete: Cascade)
+  videoSources    VideoSource[]
+  viewLogs        ViewLog[]
+
+  @@unique([seasonId, episodeNumber])
+  @@index([seriesId, seasonId, status])
+}
+
+model Genre {
+  id           String        @id @default(cuid())
+  name         String        @unique
+  slug         String        @unique
+  movieGenres  MovieGenre[]
+  seriesGenres SeriesGenre[]
+}
+
+model MovieGenre {
+  movieId String
+  genreId String
+  movie   Movie @relation(fields: [movieId], references: [id], onDelete: Cascade)
+  genre   Genre @relation(fields: [genreId], references: [id], onDelete: Cascade)
+
+  @@id([movieId, genreId])
+  @@index([genreId])
+}
+
+model SeriesGenre {
+  seriesId String
+  genreId  String
+  series   Series @relation(fields: [seriesId], references: [id], onDelete: Cascade)
+  genre    Genre  @relation(fields: [genreId], references: [id], onDelete: Cascade)
+
+  @@id([seriesId, genreId])
+  @@index([genreId])
+}
+
+model VideoSource {
+  id         String    @id @default(cuid())
+  movieId    String?
+  episodeId  String?
+  sourceName String
+  sourceUrl  String
+  quality    String
+  language   String
+  isPrimary  Boolean   @default(false)
+  sortOrder  Int       @default(1)
+  createdAt  DateTime  @default(now())
+  movie      Movie?    @relation(fields: [movieId], references: [id], onDelete: Cascade)
+  episode    Episode?  @relation(fields: [episodeId], references: [id], onDelete: Cascade)
+
+  @@index([movieId, sortOrder])
+  @@index([episodeId, sortOrder])
+}
+
+model ViewLog {
+  id        String    @id @default(cuid())
+  movieId   String?
+  episodeId String?
+  ipHash    String
+  userAgent String
+  createdAt DateTime  @default(now())
+  movie     Movie?    @relation(fields: [movieId], references: [id], onDelete: Cascade)
+  episode   Episode?  @relation(fields: [episodeId], references: [id], onDelete: Cascade)
+
+  @@index([movieId, createdAt])
+  @@index([episodeId, createdAt])
+}
+
+model AdPlacement {
+  id        String   @id @default(cuid())
+  name      String
+  position  String   @unique
+  enabled   Boolean  @default(true)
+  code      String   @db.Text
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}

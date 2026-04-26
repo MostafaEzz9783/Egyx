@@ -1,0 +1,16 @@
+services:
+  postgres:
+    image: postgres:16-alpine
+    container_name: stream-platform-postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: stream_admin
+      POSTGRES_PASSWORD: stream_password
+      POSTGRES_DB: stream_platform
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+volumes:
+  postgres_data:
