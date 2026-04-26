@@ -26,6 +26,8 @@ export function RightSidebar({ sidebarAdCode, sidebarAdEnabled = true }: RightSi
 
   return (
     <div className="ad-rail w-[200px]">
+      <SidebarAd code={sidebarAdCode} enabled={sidebarAdEnabled} />
+
       <div className="sidebar-box p-0">
         <div className="sidebar-title px-4 pt-4">القائمة</div>
         <nav className="pb-2">
@@ -54,8 +56,6 @@ export function RightSidebar({ sidebarAdCode, sidebarAdEnabled = true }: RightSi
           })}
         </nav>
       </div>
-
-      <SidebarAd code={sidebarAdCode} enabled={sidebarAdEnabled} />
     </div>
   );
 }
