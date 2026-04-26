@@ -43,20 +43,26 @@
 
   .public-layout {
     @apply grid items-start gap-5;
+    direction: ltr;
     grid-template-columns: 220px minmax(0, 1fr) 220px;
+    grid-template-areas: "left center right";
   }
 
   .public-layout-right {
-    grid-column: 3;
+    direction: rtl;
+    grid-area: right;
   }
 
   .public-layout-center {
     @apply min-w-0 space-y-5;
-    grid-column: 2;
+    direction: rtl;
+    grid-area: center;
+    width: 100%;
   }
 
   .public-layout-left {
-    grid-column: 1;
+    direction: rtl;
+    grid-area: left;
   }
 
   .section-title {
@@ -69,8 +75,12 @@
 
   .grid-cards {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
     gap: 12px;
+  }
+
+  .grid-cards > * {
+    min-width: 0;
   }
 
   .input-like {

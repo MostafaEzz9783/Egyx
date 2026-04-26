@@ -82,6 +82,26 @@ async function connectGenres(genreIds: string[]) {
   }));
 }
 
+async function ensureUniqueMovieSlug(baseValue: string, excludeId?: string) {
+  const baseSlug = slugify(baseValue) || `movie-${Date.now()}`;
+  let candidate = baseSlug;
+  let counter = 2;
+
+  while (true) {
+    const existing = await db.movie.findUnique({
+      where: { slug: candidate },
+      select: { id: true }
+    });
+
+    if (!existing || existing.id === excludeId) {
+      return candidate;
+    }
+
+    candidate = `${baseSlug}-${counter}`;
+    counter += 1;
+  }
+}
+
 export async function authenticateAdminAction(formData: FormData) {
   const email = sanitizeText(formData.get("email"));
   const password = sanitizeText(formData.get("password"));
@@ -157,7 +177,8 @@ export async function createMovieAction(formData: FormData) {
   if (!parsed.success) return;
 
   const title = parsed.data.title;
-  const slug = sanitizeText(formData.get("slug")) || slugify(title);
+  const requestedSlug = sanitizeText(formData.get("slug")) || title;
+  const slug = await ensureUniqueMovieSlug(requestedSlug);
   const genreIds = formData.getAll("genreIds").map((value) => sanitizeText(value)).filter(Boolean);
 
   await db.movie.create({
@@ -196,7 +217,8 @@ export async function updateMovieAction(formData: FormData) {
   if (!parsed.success || !id) return;
 
   const title = parsed.data.title;
-  const slug = sanitizeText(formData.get("slug")) || slugify(title);
+  const requestedSlug = sanitizeText(formData.get("slug")) || title;
+  const slug = await ensureUniqueMovieSlug(requestedSlug, id);
   const genreIds = formData.getAll("genreIds").map((value) => sanitizeText(value)).filter(Boolean);
 
   await db.movie.update({
