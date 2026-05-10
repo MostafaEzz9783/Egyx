@@ -3,6 +3,7 @@ export const siteConfig = {
   shortName: "EgyX",
   description: "EgyX",
   url: process.env.APP_URL || process.env.NEXTAUTH_URL || "http://localhost:3000",
+  googleSiteVerification: process.env.GOOGLE_SITE_VERIFICATION || "",
   locale: "ar_SA",
   keywords: ["EgyX", "أفلام", "مسلسلات", "حلقات"],
   adminEmail: "admin@example.com",

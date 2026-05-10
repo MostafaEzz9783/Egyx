@@ -2,12 +2,20 @@ import type { Metadata } from "next";
 import { Analytics } from "@vercel/analytics/react";
 import "./globals.css";
 import { buildMetadata } from "@/lib/seo";
+import { siteConfig } from "@/config/site";
 
-export const metadata: Metadata = buildMetadata({
-  title: "الرئيسية",
-  description: "EgyX",
-  path: "/"
-});
+export const metadata: Metadata = {
+  ...buildMetadata({
+    title: "الرئيسية",
+    description: "EgyX",
+    path: "/"
+  }),
+  verification: siteConfig.googleSiteVerification
+    ? {
+        google: siteConfig.googleSiteVerification
+      }
+    : undefined
+};
 
 export default function RootLayout({
   children
